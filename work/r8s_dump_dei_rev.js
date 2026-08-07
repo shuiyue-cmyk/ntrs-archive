@@ -1,0 +1,12 @@
+const fs = require('fs');
+const path = 'C:/Users/zouyu/Downloads/酒馆/数据库/剧情推进预设/Cirno_NTRS_turn_edit_DEI_revise_ALLin_4.7.json';
+const j = JSON.parse(fs.readFileSync(path, 'utf8'));
+const p = j[0];
+const t = p.plotTasks.find(x => x.id === 'plotTaskThugTempo');
+const c = t.promptGroup[4].content;
+let i = c.indexOf('刷新状态两档');
+console.log('--- S2 region ---');
+console.log(JSON.stringify(c.slice(i - 40, i + 1400)));
+let g = c.indexOf('出场可能性判定');
+console.log('\n--- HARD RULES #3 ---');
+console.log(JSON.stringify(c.slice(g - 30, g + 800)));

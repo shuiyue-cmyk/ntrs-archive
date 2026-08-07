@@ -1,0 +1,24 @@
+﻿ITEM 1: found=1 expected=1 OK
+ITEM 9: found=1 expected=1 OK
+ITEM 15: found=1 expected=1 OK
+ITEM 16: found=1 expected=1 OK
+ITEM 17: found=0 expected=1 MISMATCH
+  [diagnose] T2.pg[17] USER frag idx=2618: "值进度条）？NTRS期对象：淫妻线五阶段是否合理推进？五阶段路径守护不可逆？\n c) 已站队的对象（已是 {{user}} 恋人/配偶）是否仍按雄竞判定未豁免？黄毛是否照常刷新/行动？\n d) **t"
+ITEM 18a: found=6 expected=6 OK
+ITEM 18b: found=1 expected=1 OK
+ITEM 18c: found=1 expected=1 OK
+ITEM 19: found=1 expected=1 OK
+ITEM 20a: found=1 expected=1 OK
+ITEM 20b: found=1 expected=1 OK
+ITEM 20c: found=1 expected=1 OK
+ITEM 20d: found=1 expected=1 OK
+ITEM 21: found=1 expected=1 OK
+ITEM 22: found=1 expected=1 OK
+ITEM 23: found=2 expected=2 OK
+ITEM 24: found=1 expected=1 OK
+ITEM 25: found=1 expected=1 OK
+ITEM 26: found=1 expected=1 OK
+ITEM 29: found=1 expected=1 OK
+written. bytes before=152497 after=154286 delta=1789
+allOk=false
+raw starts with [ : true

@@ -1,0 +1,81 @@
+﻿==== 黄毛表是否有 DDL/CREATE ====
+sourceData 含 CREATE TABLE: true
+sourceData 含 -- 黄毛表: true
+sheet_dCudvUnH 含 CREATE TABLE
+sheet_DpKcVGqg 含 CREATE TABLE
+sheet_NcBlYRH5 含 CREATE TABLE
+sheet_thug_characters 含 CREATE TABLE
+sheet_lEARaBa8 含 CREATE TABLE
+sheet_in05z9vz 含 CREATE TABLE
+sheet_etak47Ve 含 CREATE TABLE
+sheet_3NoMc1wI 含 CREATE TABLE
+sheet_OptionsNew 含 CREATE TABLE
+sheet_thug_diary 含 CREATE TABLE
+sheet_heroine_diary 含 CREATE TABLE
+sheet_ntrs_memo 含 CREATE TABLE
+==== 映射构建循环上下文（前2500字） ====
+         }
+            else {
+                current += ch;
+            }
+        }
+        if (current.trim()) {
+            clauses.push(current);
+        }
+        return clauses;
+    }
+    /**
+     * 判断值是否是引号包裹的字符串
+     * "'hello'" → true, "123" → false, "NULL" → false
+     */
+    function isQuotedString(value) {
+        return value.startsWith("'") && value.endsWith("'") && value.length >= 2;
+    }
+
+    /**
+     * shared/ddl-utils.ts — DDL 纯解析/操作工具函数
+     *
+     * 这些函数只做字符串解析，不访问数据库、不读写存储、不依赖任何 data 层基础设施。
+     * 所有层（data / service / presentation）均可直接 import。
+     */
+    // ═══════════════════════════════════════════════════════════════
+    // DDL 解析
+    // ═══════════════════════════════════════════════════════════════
+    /**
+     * 从 DDL 中解析英文表名
+     * @param ddl CREATE TABLE 语句
+     * @returns 表名，解析失败返回 null
+     */
+    function parseDDLTableName(ddl) {
+        const bounds = findCreateTableDefinitionBounds_ACU(String(ddl || ''));
+        return bounds?.tableName || null;
+    }
+    /**
+     * Rebinds only the CREATE TABLE identifier in a parsed DDL statement.
+     * It deliberately does not use a broad replacement: literals, comments,
+     * constraints and nested expressions must remain byte-for-byte untouched.
+     */
+    function rebindCreateTableName_ACU(ddl, tableName) {
+        const value = String(ddl || '');
+        const replacement = String(tableName || '').trim();
+        if (!/^[A-Za-z_][A-Za-z0-9_]*$/.test(replacement)) {
+            throw new Error(`无效的 SQLite runtime 表名：${replacement || '(empty)'}`);
+        }
+        const bounds = findCreateTableDefinitionBounds_ACU(value);
+        if (!bounds)
+            throw new Error('无法解析 CREATE TABLE 语句，不能重绑定 runtime 表名。');
+        return `${value.slice(0, bounds.tableNameStart)}${replacement}${value.slice(bounds.tableNameEnd)}`;
+    }
+    /**
+     * 从 DDL 第一行注释中解析中文表名
+     * 格式：CREATE TABLE table_name ( -- 中文表名
+     * @param ddl CREATE TABLE 语句
+     * @returns 中文表名，解析失败返回 null
+     */
+    function parseDDLChineseName(ddl) {
+        if (!ddl)
+            return null;
+        // 匹配第一行的 -- 注释
+        const firstLine = ddl.split('\n')[0];
+        const match = firstLine.match(/--\s*(.+?)\s*$/);
+   

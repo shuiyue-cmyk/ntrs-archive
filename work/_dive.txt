@@ -1,0 +1,38 @@
+﻿==== renderPlotTaskContentWithIsolatedVariables ====
+function renderPlotTaskContentWithIsolatedVariables_ACU(content, sharedContext) {
+        const contextForCalc = { allTablesJson: sharedContext.allTablesJson };
+        const contextForIf = {
+            seedContent: sharedContext.seedContentForConditional,
+            allTablesJson: sharedContext.allTablesJson,
+            plotContent: sharedContext.taskPlotContent || sharedContext.lastPlotContent || '',
+        };
+        return runWithIsolatedPlotTemplateVariables_ACU(() => {
+            let renderedContent = content;
+            renderedContent = parseRandomTags_ACU(renderedContent);
+            renderedContent = replaceRandomVariables_ACU(renderedContent);
+            renderedContent = parseCalcTags_ACU(renderedContent, contextForCalc);
+            renderedContent = parseMaxTags_ACU(renderedContent, contextForCalc);
+            renderedContent = parseMinTags_ACU(renderedContent, contextForCalc);
+            renderedContent = replaceCalcVariables_ACU(renderedContent);
+            renderedContent = replaceMaxVariables_ACU(renderedContent);
+            renderedContent = replaceMinVariables_ACU(renderedContent);
+            // [P4] {[db...]}/{[sql...]} 值替换（SQLite 模式下，在 <if> 之前执行）
+            renderedContent = replaceDbSqlVariables(renderedContent);
+            return parseIfBlockRecursive_ACU(renderedContent, contextForIf, 0);
+        });
+    }
+    // ═══ XML 标签提取与占位符 ═══
+    function extractLastTagContent_ACU(text, rawTagName) {
+        if (!text || !rawTagName)
+           
+==== allTablesJson 出现 ====
+@274680 "ars.ts 拆出\n     */\n    /**\n     * 获取表格中指定单元格的值\n     * @param allTablesJson - 完整的表格数据对象\n     * @param tableName - 表格名\n     * @param rowName - "
+@274932 "ng, error?: string }}\n     */\n    function getCellValue_ACU(allTablesJson, tableName, rowName, colName) {\n        try {\n            if (!all"
+@275009 "bleName, rowName, colName) {\n        try {\n            if (!allTablesJson || typeof allTablesJson !== 'object') {\n                return { s"
+@275033 "e) {\n        try {\n            if (!allTablesJson || typeof allTablesJson !== 'object') {\n                return { success: false, value: nu"
+@275191 "' };\n            }\n            const sheets = Object.values(allTablesJson).filter((x) => x && typeof x === 'object' && x.name && x.content);"
+@279236 "     */\n    function evaluateCellExpression_ACU(expression, allTablesJson) {\n        if (!expression || typeof expression !== 'string')\n    "
+@280415 "      const [tableName, name1, name2] = parts;\n        if (!allTablesJson || typeof allTablesJson !== 'object') {\n            return matched"
+@280439 "name1, name2] = parts;\n        if (!allTablesJson || typeof allTablesJson !== 'object') {\n            return matchedOperator === '!=';\n     "
+@280561 "or === '!=';\n        }\n        const sheets = Object.values(allTablesJson).filter((x) => x && typeof x === 'object' && x.name && x.content);"
+@281324 "Name = name2;\n            let cellResult = getCellValue_ACU(allTablesJson, tableName, rowName, colName);\n            if (cellResult.success)"

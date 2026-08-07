@@ -1,0 +1,57 @@
+﻿==== $0: 定义 ====
+==== TableQueryBuilder ====
+class TableQueryBuilder {
+        constructor(tableName, options = {}) {
+            this.conditions = [];
+            this._orGroups = [];
+            this._orderBy = null;
+            this._limit = null;
+            this._groupBy = null;
+            this._having = null;
+            this._distinct = false;
+            this._offset = null;
+            // 通过 NameMapper 解析表名（中文→英文）
+            const mapper = getNameMapper();
+            this.tableName = mapper.resolveTableName(tableName);
+            this.options = options;
+        }
+        /**
+         * 添加 WHERE 条件
+         * 支持两种调用方式：
+         *   where("列名", "值")        → 列名 = '值'
+         *   where("列名", ">", 数值)   → 列名 > 数值
+         */
+        where(column, valueOrOperator, value) {
+            const mapper = getNameMapper();
+            const resolvedColumn = mapper.resolveColumnName(this.tableName, column);
+            if (value !== undefined) {
+                // 三参数形式：where("列名", ">", 数值)
+                this.conditions.push({ column: resolvedColumn, operator: String(valueOrOperator), value });
+            }
+            else {
+                // 两参数形式：where("列名", "值")
+                this.conditions.push({ column: resolvedColumn, operator: '=', value: valueOrOperator });
+            }
+            return this;
+        }
+        /**
+         * 添加 OR WHERE 条件组
+         * 将当前 AND 条件组保存，开始新的 OR 分支
+         *   orWhere("列名", "值")        → OR 列名 = '值'
+         *   orWhere("列名", ">", 数值)   → OR 列名 > 数值
+         */
+        orWhere(column, valueOrOperator, value) {
+            // 将当前 AND 条件组保存为一个 OR 分支
+            if (this.conditions.length > 0) {
+                this._orGroups.push([...this.conditions]);
+                this.conditions = [];
+            }
+            // 添加新条件到新的 AND 组
+            return this.where(column, valueOrOperator, value);
+        }
+        /**
+         * IN 查询
+         *   whereIn("列名", [值1, 值2, 值3])  → 列名 IN ('值1', '值2', '值3')
+         */
+        whereIn(column, values) {
+            const 

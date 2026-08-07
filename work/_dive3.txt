@@ -1,0 +1,45 @@
+﻿==== performReplacements ====
+@3503103 "         $C: charInfoContent_Plot,\n        };\n        const performReplacements = (text, taskOverrides = {}) => {\n            if (!text)\n                return '';\n            let processed = text;\n            // 任务级世界书内容优先；若未提供则使用共享预计算值（当前为空）\n            const effectiveWorldbookContent = taskOverrides.$1 !== undefined\n                ? String(taskOverrides.$1)\n                : worldbookContent;\n            processed = processed.replace(/(?<!\\\\)\\$1/g, wrapWorldbookContext(effectiveWorldbookContent, '$1'));\n            const effectiveDatabaseExcludedWorldbookContent = taskOverrides.$9 !== undefined\n                ? String(taskOverrides.$9)\n                : String(replacements.$9 || '');\n            processed = processed.replace(/(?<!\\\\)\\$9/g, wrapWorldbookContext(effectiveDatabaseExcludedWorldbookContent, '$9'));\n            for (const key in replacements) {\n                if (key === '$9')\n                    continue;\n                const v"
+==== createDbProxy ====
+function createDbProxy() {
+        return new Proxy({}, {
+            get(_target, propName) {
+                // 静态方法：db.expr("SQL表达式") — 执行任意 SQL 表达式
+                if (propName === 'expr')
+                    return execExpr;
+                // 静态方法：db.rand(min, max) — 生成随机整数
+                if (propName === 'rand')
+                    return execRand;
+                // 静态方法：db.calc("算术表达式") — 执行含 $v: 变量引用的算术表达式
+                if (propName === 'calc')
+                    return execCalc;
+                // 静态方法：db.max(值1, 值2, ...) — 取多个值中的最大值
+                if (propName === 'max')
+                    return execMax;
+                // 静态方法：db.min(值1, 值2, ...) — 取多个值中的最小值
+                if (propName === 'min')
+                    return execMin;
+                // 默认：创建 TableQueryBuilder
+                return new TableQueryBuilder(propName);
+            }
+        });
+    }
+    /**
+     * db.expr("SQL表达式") — 执行任意 SQL 表达式并返回结果
+     * 支持中文表名/列名翻译、子查询、算术运算
+     * 示例：
+     *   db.expr("3 + 5 * 2")  → 13
+     *   db.expr("(SELECT 数量 FROM 背包物品表 WHERE 物品名称='铁剑') * 2")  → 6
+     */
+    function execExpr(expression) {
+        try {
+            if (!expression || typeof expression !== 'string' || !expression.trim()) {
+                logWarn_ACU('[db.expr] 空表达式');
+                return null;
+            }
+            if (!isTemplateQueryRuntimeReady_ACU('db.expr'))
+                return null;
+            const translatedExpr = resolveTemplateReadSql_ACU(expression.trim());
+   
+==== resolveTaskTableWorldbookTokens ====
+"continue;\n            let c = seg.content;\n            if (typeof sharedContext.resolveTaskTableWorldbookTokens === 'function') {\n                c = await sharedContext.resolveTaskTableWorldbookTokens(c);\n            }\n            c = await tryRenderPlotTemplateWithEjs_ACU(c);\n            c = sharedContext.performReplacements(c, replacementOverrides);\n            c = replacePlotTagPlaceholders_ACU(c, relayTagMap, historyTagMap);\n            c = renderPlotTaskContentWithIsolatedVariables_ACU(c, sharedContext);\n            seg.__renderedContent = c;\n        }\n        return messagesToUse\n            .filter(seg => seg && typeof seg.__renderedContent === 'string' && seg.__r"

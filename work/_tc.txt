@@ -1,0 +1,47 @@
+﻿==== BATTLE NTRS 三版表格引用 ====
+Cirno_BATTLE_Turn_straight_NTRS.json | $0: 无 | 当前表格数据: 无 | 黄毛表: 有 | {[db: 无
+Cirno_BATTLE_Turn_FT_NTRS.json | $0: 无 | 当前表格数据: 无 | 黄毛表: 有 | {[db: 无
+Cirno_BATTLE_Turn_DEI_NTRS.json | $0: 无 | 当前表格数据: 无 | 黄毛表: 有 | {[db: 无
+==== replaceDbExpressions ====
+function replaceDbExpressions(content) {
+        const marker = '{[db.';
+        let result = '';
+        let i = 0;
+        while (i < content.length) {
+            const markerIndex = content.indexOf(marker, i);
+            if (markerIndex === -1) {
+                result += content.slice(i);
+                break;
+            }
+            // 添加 marker 之前的文本
+            result += content.slice(i, markerIndex);
+            // 从 {[ 之后开始，跟踪括号深度找到匹配的 ]}
+            const exprStart = markerIndex + 2; // 跳过 {[
+            let bracketDepth = 1; // 已经有一个 [
+            let parenDepth = 0;
+            let inSingleQuote = false;
+            let inDoubleQuote = false;
+            let j = exprStart;
+            let found = false;
+            while (j < content.length) {
+                const ch = content[j];
+                // 处理引号状态（引号内的括号不计入深度）
+                if (ch === "'" && !inDoubleQuote) {
+                    inSingleQuote = !inSingleQuote;
+                    j++;
+                    continue;
+                }
+                if (ch === '"' && !inSingleQuote) {
+                    inDoubleQuote = !inDoubleQuote;
+                    j++;
+                    continue;
+                }
+                if (!inSingleQuote && !inDoubleQuote) {
+                    if (ch === '[') {
+                        bracketDepth++;
+                    }
+                    else if (ch === ']') {
+                        bracketDepth--;
+                        if (bracketDepth === 0) {
+                            if (j + 1 < content.length && content[j + 1] === '}') {
+                        

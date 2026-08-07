@@ -1,0 +1,45 @@
+﻿JSON parse: OK
+raw starts with [ : true
+top-level is array: true
+name: Cirno_BATTLE_Turn_DEI_NTRS
+plotTasks count: 3
+NEW[1] count=3 expected=1 FAIL
+NEW[9] count=1 expected=1 OK
+NEW[15] count=1 expected=1 OK
+NEW[16] count=1 expected=1 OK
+NEW[17] count=1 expected=1 OK
+NEW[18a] count=6 expected=6 OK
+NEW[18b] count=1 expected=1 OK
+NEW[18c] count=1 expected=1 OK
+NEW[19] count=1 expected=1 OK
+NEW[20a] count=1 expected=1 OK
+NEW[20b] count=1 expected=1 OK
+NEW[20c] count=1 expected=1 OK
+NEW[20d] count=1 expected=1 OK
+NEW[21] count=1 expected=1 OK
+NEW[22] count=1 expected=1 OK
+NEW[23] count=2 expected=2 OK
+NEW[24] count=1 expected=1 OK
+NEW[25] count=1 expected=1 OK
+NEW[26] count=1 expected=1 OK
+NEW[29] count=1 expected=1 OK
+OLD[1] residual count=0 GONE
+OLD[9] residual count=0 GONE
+OLD[15] residual count=0 GONE
+OLD[16] residual count=0 GONE
+OLD[17] residual count=0 GONE
+OLD[18a] residual count=0 GONE
+OLD[18b] residual count=0 GONE
+OLD[18c] residual count=0 GONE
+OLD[19] residual count=0 GONE
+OLD[20a] residual count=0 GONE
+OLD[20b] residual count=0 GONE
+OLD[20c] residual count=0 GONE
+OLD[20d] residual count=0 GONE
+OLD[21] residual count=0 GONE
+OLD[24] residual count=0 GONE
+OLD[25] residual count=1 STILL PRESENT
+OLD[26] residual count=0 GONE
+OLD[29] residual count=0 GONE
+ITEM22 old-prefix now occurs 1 (expected 1 — kept as prefix of appended new text)
+allNewOk=false allOldOk=false

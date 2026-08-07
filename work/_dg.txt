@@ -1,0 +1,25 @@
+﻿==== TableQueryBuilder get() ====
+get() not found in class
+==== getNameMapper ====
+function getNameMapper() {
+        if (!_globalNameMapper) {
+            _globalNameMapper = new NameMapper();
+        }
+        return _globalNameMapper;
+    }
+    /** 运行时校验发布凭证：只承认本模块签发过的对象实例。 */
+    function isNameMapperOwnerToken_ACU(owner) {
+        return !!owner && typeof owner === 'object' && _issuedNameMapperOwners_ACU.has(owner);
+    }
+    /** 更旧的 runtime 实例不得覆盖更新实例已经发布的映射。 */
+    function canPublishWithOwner_ACU(owner) {
+        if (!isNameMapperOwnerToken_ACU(owner))
+            return false;
+        return !_globalNameMapperOwner_ACU || owner.id >= _globalNameMapperOwner_ACU.id;
+    }
+    function applyGlobalNameMapper_ACU(mapper, signature, owner) {
+        _globalNameMapper = mapper;
+        _globalNameMapperSchemaSignature = signature;
+        _globalNameMapperBinding_ACU =
+==== resolveTableName ====
+"\n            return mapper;\n        }\n        /**\n         * 解析表名（中文→英文，英文直接返回）\n         */\n        resolveTableName(name) {\n            if (!name)\n                return name;\n            const trimmed = name.trim();\n            // 先查中文映射\n            const english = this.tableNameMap.get(trimmed);\n            if (english)\n                return english;\n            // 检查是否本身就是英文表名\n            if (this.reverseTableMap.has(trimmed))\n                return trimmed;\n            //

@@ -1,0 +1,53 @@
+﻿sourceData 类型: object 
+==== DDL 附近 ====
+"CREATE TABLE thug_characters ( -- 黄毛表\\n  row_id INTEGER PRIMARY KEY, -- 行号\\n  name TEXT NOT NULL UNIQUE, -- 姓名\\n  age INTEGER CHECK(age IS NULL OR age >= 0), -- 年龄\\n  brief_intro TEXT NOT NULL, -- 一句话介绍\\n  appearance TEXT, -- 外貌特征\\n  outfit_text TEXT, -- 穿着打扮\\n  location_name TEXT, -- 所在地点\\n  locked"
+==== 映射构建循环（anchor 上方 1600 字） ====
+     ownerLabel: _globalNameMapperOwner_ACU?.label ?? null,
+            ownerId: _globalNameMapperOwner_ACU?.id ?? null,
+        };
+    }
+    /**
+     * 无条件销毁全局 NameMapper 并清除发布所有权。
+     * 仅用于测试隔离与明确的顶层全局复位；runtime 生命周期请使用 owner-aware 释放。
+     */
+    function disposeGlobalNameMapper() {
+        _globalNameMapper = null;
+        _globalNameMapperSchemaSignature = null;
+        _globalNameMapperBinding_ACU = 'unbound';
+        _globalNameMapperOwner_ACU = null;
+    }
+    /**
+     * 中英文名称双向映射器
+     */
+    class NameMapper {
+        constructor() {
+            // 表名映射：中文 → 英文
+            this.tableNameMap = new Map();
+            // 列名映射：表英文名.中文列名 → 英文列名
+            this.columnNameMap = new Map();
+            // 反向映射：英文 → 中文
+            this.reverseTableMap = new Map();
+            this.reverseColumnMap = new Map();
+        }
+        /** 映射的表数量 */
+        get tableCount() {
+            return this.reverseTableMap.size;
+        }
+        /**
+         * 从多张表的 DDL 构建映射器
+         *
+         * Map key 是由完整 TableDataObject 分配的 runtime 物理表名；不能从
+         * 用户可编辑的 DDL 文本重新推导，否则显示名与 DDL 名不一致时会向 SQLite
+         * 发出不存在的表名。
+         */
+        static fromDDLs(ddlMap) {
+            const mapper = new NameMapper();
+            for (const [physicalTableName, ddl] of ddlMap) {
+                const englishTableName = String(physicalTableName || '').trim();
+                if (!englishTableName || !ddl)
+                    continue;
+                // 解析中文表名（DDL 第一行注释）
+                const chineseTableName = parseDDLChineseName(ddl);
+                if (chineseTableName) {
+                    mapper.tableNameMap.set(chineseTableName, englishTableName);
+                    mapper.reverseTableMap.set(englishTable

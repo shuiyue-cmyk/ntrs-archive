@@ -1,0 +1,2 @@
+﻿ITEM 17 found=1 expected=1 OK
+written. raw starts with [ : true

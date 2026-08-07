@@ -1,0 +1,5 @@
+﻿==== tableNameMap ====
+@3007771 "     */\n    class NameMapper {\n        constructor() {\n            // 表名映射：中文 → 英文\n            this.tableNameMap = new Map();\n            // 列名映射：表英文名.中文列名 → 英文列名\n            this.columnNameMap = new Map();\n            // 反向映射：英文 → 中文\n            this.reverseTableMap = new Map();\n         
+@3008782 "Name = parseDDLChineseName(ddl);\n                if (chineseTableName) {\n                    mapper.tableNameMap.set(chineseTableName, englishTableName);\n                    mapper.reverseTableMap.set(englishTableName, chineseTableName);\n                }\n                else {\n              
+==== TableQueryBuilder methods ==== constructor, where, orWhere, whereIn, whereBetween, groupBy, distinct, whereNotIn, whereNull, whereNotNull, whereLike, having, offset, orderBy, limit, get, first, list, all, count, sum, avg, max, min, value, exists, toSQL, _buildSelect
+==== 黄毛表 在 8.8.js ==== 不出现

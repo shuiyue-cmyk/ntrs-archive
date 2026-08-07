@@ -1,0 +1,21 @@
+﻿node : C:\Users\zouyu\Downloads\BATTLE_work\_dive_ddl3.js:9
+所在位置 行:1 字符: 87
++ ... new($false);node "C:\Users\zouyu\Downloads\BATTLE_work\_dive_ddl3.js" ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (C:\Users\zouyu\..._dive_ddl3.js:9:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+const firstCreate = sd.indexOf('CREATE TABLE');
+                       ^
+
+TypeError: sd.indexOf is not a function
+    at Object.<anonymous> (C:\Users\zouyu\Downloads\BATTLE_work\_dive_ddl3.js:9:24)
+    at Module._compile (node:internal/modules/cjs/loader:1830:14)
+    at Object..js (node:internal/modules/cjs/loader:1961:10)
+    at Module.load (node:internal/modules/cjs/loader:1553:32)
+    at Module._load (node:internal/modules/cjs/loader:1355:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+
+Node.js v24.15.0

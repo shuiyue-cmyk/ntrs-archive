@@ -1,0 +1,50 @@
+﻿==== plotPrompt (4)
+  @4330173 "sContainer_ACU, $saveCharCardPromptButton_ACU, $resetCharCardPromptButton_ACU, $plotPromptSegmentsContainer_ACU, $plotTaskListContainer_ACU, $autoUpdateThresholdInput_ACU, $saveAutoUpdateThresholdButt"
+  @4333539 "CharCardPromptButton_ACU = map.$resetCharCardPromptButton_ACU;\n        if (map.$plotPromptSegmentsContainer_ACU !== undefined)\n            $plotPromptSegmentsContainer_ACU = map.$plotPromptSegmentsCon"
+  @4333599 "U;\n        if (map.$plotPromptSegmentsContainer_ACU !== undefined)\n            $plotPromptSegmentsContainer_ACU = map.$plotPromptSegmentsContainer_ACU;\n        if (map.$plotTaskListContainer_ACU !== u"
+  @4333638 "ontainer_ACU !== undefined)\n            $plotPromptSegmentsContainer_ACU = map.$plotPromptSegmentsContainer_ACU;\n        if (map.$plotTaskListContainer_ACU !== undefined)\n            $plotTaskListCont"
+==== renderPlotTask (4)
+  @3436607 "estorePlotTemplateVariables_ACU(previousSnapshot);\n        }\n    }\n    function renderPlotTaskContentWithIsolatedVariables_ACU(content, sharedContext) {\n        const contextForCalc = { allTablesJson:"
+  @3446197 "   * 2. 否则从 plotContent（上轮剧情历史）中按 tagName 提取 XML 标签内容\n     *\n     * 这保证世界书触发依据与 renderPlotTaskMessages_ACU 中的 {{tag}} 注入来源一致：\n     * - 第一阶段（useHistoryRelay=true）：relayTagMap 为空，走 plotContent（上一轮历史）\n  "
+  @3506180 "   allTablesJson: currentJsonTableData_ACU,\n        };\n    }\n    async function renderPlotTaskMessages_ACU(task, sharedContext, runtimeOptions = {}) {\n        const promptGroup = JSON.parse(JSON.strin"
+  @3507688 " replacePlotTagPlaceholders_ACU(c, relayTagMap, historyTagMap);\n            c = renderPlotTaskContentWithIsolatedVariables_ACU(c, sharedContext);\n            seg.__renderedContent = c;\n        }\n     "
+==== promptGroup (4)
+  @71288 "              \"name\": \"默认任务\",\n                \"enabled\": true,\n                \"promptGroup\": [\n                    {\n                        \"role\": \"SYSTEM\",\n                        \"conten
+  @79537 "      \"order\": 0\n            }\n        ],\n        \"globalRevision\": 0,\n        \"promptGroup\": [\n            {\n                \"role\": \"SYSTEM\",\n                \"content\": \"[RESET ROLE AND T
+  @225590 "mizations: 10,\n            loopCount: 1,\n            retryCount: 3,\n            promptGroup: [],\n        },\n        characterSettings: {},\n    };\n    function getCurrentIsolationKey_ACU() {\n        re"
+  @248768 "  if (!plotSettings)\n            return;\n        if (Array.isArray(plotSettings.promptGroup) && plotSettings.promptGroup.length > 0)\n            return;\n        const legacyMain = getLegacyPlotPromptC"
+==== 表格数据 (4)
+  @52508 "     {\n            \"role\": \"USER\",\n            \"content\": \"你是【填表AI】，负责根据用户提供的资料对表格数据执行增删改操作。\\n\\n## 核心任务\\n依据三类资料来源执行表格编辑：\\n- <背景设定>：故事及人物设定\\n- <正文数据>：上轮发生的故事\\n- <当前表格数据>：之前的数据作为填表基础\\n\\n## 输出格式（
+  @52591 "据执行增删改操作。\\n\\n## 核心任务\\n依据三类资料来源执行表格编辑：\\n- <背景设定>：故事及人物设定\\n- <正文数据>：上轮发生的故事\\n- <当前表格数据>：之前的数据作为填表基础\\n\\n## 输出格式（严格执行）\\n\\n<thought>\\n[分析当前轮次的剧情变化]\\n[阅读所有填表相关规则]\\n[根据填表规则确定需要修改的表格和字段]\\n[逐步推理每个修改操作，说明理
+  @52726 "次的剧情变化]\\n[阅读所有填表相关规则]\\n[根据填表规则确定需要修改的表格和字段]\\n[逐步推理每个修改操作，说明理由]\\n针对纪要表的额外规则：如果<当前表格数据>里存在纪要表，那么本轮就必须对其进行插入一条新的总结记录。\\n日志与纪要语气校准：你在思考纪要时，必须区分“正常恋爱互动”与“暗黑主从文风”。你可以使用正常的交流词汇（如：提议、要求、同意、拒绝、引导、配合、安抚），但【绝对禁止】"
+  @54001 "           \"content\": \"现在请按照我的要求立刻开始你的工作 \\n========================\\n\\n以下是当前的<当前表格数据>,记录有本轮之前的数据，你的一切操作指令都必须在这个<当前表格数据>的基础与指导上进行：\\n<当前表格数据>\\n$0\\n</当前表格数据>\\n\\n$8\",\n            \"deletable\": false,
+==== normalizedPreset (4)
+  @2933793 "d archivePreviousChatScope;\n        void registerChatPresetEntry;\n        const normalizedPresetName = normalizeTemplatePresetSelectionValue_ACU(presetName);\n        let shouldSaveSettings = false;\n  "
+  @2934038 "(updateGlobal) {\n            persistCurrentTemplatePresetName_ACU(settings_ACU, normalizedPresetName, { save: false });\n            shouldSaveSettings = true;\n        }\n        else if (_persistChatSc"
+  @2934530 "normalizedScopeMode === 'preset_link') {\n                const presetSnapshot = normalizedPresetName\n                    ? sanitizeTemplateSnapshotForChat_ACU(getTemplatePreset_ACU(normalizedPresetNam"
+  @2934631 "                    ? sanitizeTemplateSnapshotForChat_ACU(getTemplatePreset_ACU(normalizedPresetName)?.templateStr || null)\n                    : getDefaultTemplateSnapshot_ACU();\n                cons"
+==== plotSettings.promptGroup (4)
+  @248755 " {}) {\n        if (!plotSettings)\n            return;\n        if (Array.isArray(plotSettings.promptGroup) && plotSettings.promptGroup.length > 0)\n            return;\n        const legacyMain = getLega"
+  @248784 "ngs)\n            return;\n        if (Array.isArray(plotSettings.promptGroup) && plotSettings.promptGroup.length > 0)\n            return;\n        const legacyMain = getLegacyPlotPromptContent_ACU(plotS"
+  @249147 "emPrompt') || (DEFAULT_PLOT_SETTINGS_ACU?.prompts?.[1]?.content || '');\n        plotSettings.promptGroup = buildDefaultPlotPromptGroup_ACU({\n            mainAContent: legacyMain,\n            mainBCont"
+  @4217404 "  const normalizedPromptGroup = getPlotPromptGroupFromSource_ACU(task);\n        plotSettings.promptGroup = JSON.parse(JSON.stringify(normalizedPromptGroup));\n        plotSettings.extractTags = typeof "
+==== contextExtractRules (4)
+  @68885 " 25,\n        \"extractTags\": \"recall\",\n        \"extractInjectTags\": \"\",\n        \"contextExtractRules\": [],\n        \"contextExcludeRules\": [\n            {\n                \"start\": \"<disclaim
+  @96030 "t\",\n        \"extractInjectTags\": \"\",\n        \"contextExtractTags\": \"\",\n        \"contextExtractRules\": [],\n        \"contextExcludeTags\": \"\",\n        \"contextExcludeRules\": [],\n        \"m
+  @3430114 "ules_ACU() {\n        return normalizeExtractRules_ACU(DEFAULT_PLOT_SETTINGS_ACU.contextExtractRules, DEFAULT_PLOT_SETTINGS_ACU.contextExtractTags || \"\");\n    }\n    function getDefaultPlotContextExclud"
+  @3493869 "();\n                const extractRules = normalizeExtractRules_ACU(plotSettings.contextExtractRules, extractTags);\n                const excludeTags = (plotSettings.contextExcludeTags || '').trim();\n "
+==== contextExcludeRules (4)
+  @68920 "\",\n        \"extractInjectTags\": \"\",\n        \"contextExtractRules\": [],\n        \"contextExcludeRules\": [\n            {\n                \"start\": \"<disclaimer\",\n                \"end\": \"</dis
+  @96099 ",\n        \"contextExtractRules\": [],\n        \"contextExcludeTags\": \"\",\n        \"contextExcludeRules\": [],\n        \"minLength\": 0,\n        \"contextTurnCount\": 3,\n        \"worldbookEnabled\": 
+  @3430316 "ules_ACU() {\n        return normalizeExcludeRules_ACU(DEFAULT_PLOT_SETTINGS_ACU.contextExcludeRules, DEFAULT_PLOT_SETTINGS_ACU.contextExcludeTags || \"\");\n    }\n    function removeLastMatchedBoundary_A"
+  @3494064 "();\n                const excludeRules = normalizeExcludeRules_ACU(plotSettings.contextExcludeRules, excludeTags);\n                if (extractTags || extractRules.length > 0 || excludeTags || excludeR"
+==== plotWorldbookConfig (4)
+  @70764 "rldbooks\": [],\n        \"disabledWorldbookEntries\": \"__ALL_SELECTED__\",\n        \"plotWorldbookConfig\": {\n            \"source\": \"character\",\n            \"manualSelection\": []\n        },\n      
+  @96353 "rldbooks\": [],\n        \"disabledWorldbookEntries\": \"__ALL_SELECTED__\",\n        \"plotWorldbookConfig\": {\n            \"source\": \"character\",\n            \"manualSelection\": [],\n            \"ena
+  @3175365 "lot_ACU(plotSettings) {\n        try {\n            const plotCfg = plotSettings?.plotWorldbookConfig;\n            const worldbookSource = plotCfg?.source || 'character';\n            let bookNames = [];"
+  @3261028 " ? settings_ACU.plotSettings\n            : {};\n        const cfg = plotSettings.plotWorldbookConfig;\n        return cfg && typeof cfg === 'object' && !Array.isArray(cfg) ? cfg : {};\n    }\n    function"
+==== finalSystemDirective (4)
+  @68233 "         \"deletable\": false\n            },\n            {\n                \"id\": \"finalSystemDirective\",\n                \"name\": \"最终注入指令\",\n                \"role\": \"system\",\n                \"
+  @87177 "，天之音开始执行！\",\n                \"deletable\": true\n            }\n        ],\n        \"finalSystemDirective\": \"以下是用户的本轮输入：\\n<本轮用户输入>\\n$8\\n</本轮用户输入>\\n\\n以下输入的代码为既定事实记忆的对应索引编码，并已按时间距离分组。注意，请参考这些过去记忆保持剧情连续
+  @95496 "         \"deletable\": false\n            },\n            {\n                \"id\": \"finalSystemDirective\",\n                \"name\": \"最终注入指令\",\n                \"role\": \"system\",\n                \"
+  @3450791 "ackText_ACU(taskResults);\n    }\n    function buildFinalPlotInjectionMessage_ACU(finalSystemDirectiveContent, taskResults, aggregatedTags, injectOnlyTagNames = new Set()) {\n        const defaultDirecti"

@@ -1,0 +1,10 @@
+﻿[S2 MSG4]
+  L23: ② 分支A——黄毛表已命中该目标黄毛，本轮判定其在场合理，沿用已有黄毛（标签内不重写人设，只标"沿用：已有黄毛 XX，锁定目标 YY" + 锁定指令行；锁定状态/进度的权威源是 $0 黄毛表（progress_percent 以该行值为准））。**当本轮发生背
+  L69: - 是否已在 黄毛表 命中已有黄毛条目（查 $0 当前表格数据——命中则注黄毛名 + 该行 lock_status + progress_percent；未命中则注 [未绑定黄毛]）
+[S3 MSG0]
+  L8: - <ntrsProgress> 标签随 plot 一并省略（进度以上轮 $0 黄毛表 progress_percent 为准，本轮不推进）
+  L18: 【黄毛刷新状态】spawn=本轮有黄毛在场 / no_spawn=本轮无黄毛在场；你须照其决定本轮 prologue 登场角色名单是否纳入新黄毛、纳入到什么程度（沿用分支的型体设定/性器官规则从 msg15 的 $0 黄毛表 直读，不在 thugSpawn 标
+[S3 MSG15]
+  L31: 沿用 spawn（thugSpawn 写"沿用：已有黄毛 [姓名]，锁定目标 [locked_target]"）时，该黄毛的 性别类型 / 五型 / 型体设定 / 锁定状态 / 进度 五字段必须从 黄毛表 对应行直读（progress_percent 以 $0
+[S3 MSG17]
+  L61: * <thugSpawn> 刷新状态是什么？spawn 还是 no_spawn？（spawn 时按标签内人设/锁定状态编排；沿用/复用分支的型体设定从 msg15 的 $0 黄毛表 直读）

@@ -1,0 +1,42 @@
+﻿JSON parse: OK; raw starts with [ : true; top array: true
+name=Cirno_BATTLE_Turn_DEI_NTRS; plotTasks=3
+NEW[1] count=1/1 OK
+NEW[9] count=1/1 OK
+NEW[15] count=1/1 OK
+NEW[16] count=1/1 OK
+NEW[17] count=1/1 OK
+NEW[18a] count=6/6 OK
+NEW[18b] count=1/1 OK
+NEW[18c] count=1/1 OK
+NEW[19] count=1/1 OK
+NEW[20a] count=1/1 OK
+NEW[20b] count=1/1 OK
+NEW[20c] count=1/1 OK
+NEW[20d] count=1/1 OK
+NEW[21] count=1/1 OK
+NEW[22] count=1/1 OK
+NEW[23] count=2/2 OK
+NEW[24] count=1/1 OK
+NEW[25a] count=1/1 OK
+NEW[25v] count=1/1 OK
+NEW[26] count=1/1 OK
+NEW[29] count=1/1 OK
+OLD[1] residual=0 GONE
+OLD[9] residual=0 GONE
+OLD[15] residual=0 GONE
+OLD[16] residual=0 GONE
+OLD[17] residual=0 GONE
+OLD[18a] residual=0 GONE
+OLD[18b] residual=0 GONE
+OLD[18c] residual=0 GONE
+OLD[19] residual=0 GONE
+OLD[20a] residual=0 GONE
+OLD[20b] residual=0 GONE
+OLD[20c] residual=0 GONE
+OLD[20d] residual=0 GONE
+OLD[21] residual=0 GONE
+OLD[24] residual=0 GONE
+OLD[25] residual=0 GONE
+OLD[26] residual=0 GONE
+OLD[29] residual=0 GONE
+ALL PASS

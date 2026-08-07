@@ -1,0 +1,3 @@
+﻿ITEM1 full-new-sentence count=1 (expected 1)
+VARIANT25 found=1 (expected 1) OK
+written. raw starts with [ : true

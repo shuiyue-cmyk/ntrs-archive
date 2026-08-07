@@ -1,0 +1,29 @@
+﻿==== 黄毛表 sourceData 前800字 ====
+{"note":"黄毛表：记录剧情中刷新(spawn)登场的所有黄毛(NTR 第三者)角色档案与锁定动态，用于指引 AI 在后续轮次判定是否刷新新黄毛、为哪个目标刷新、以及黄毛是否行动。\n\n【列定义】\n- 列1: 姓名 name（全表唯一）\n- 列2: 年龄 age\n- 列3: 一句话介绍 brief_intro\n- 列4: 外貌特征 appearance\n- 列5: 穿着打扮 outfit_text\n- 列6: 所在地点 location_name\n- 列7: 锁定对象 locked_target —— 这个黄毛关联的💔敏感角色姓名（来自重要角色表/主角关系圈）。**可含多目标**——若本轮 `<thugSpawn>` 标签的锁定目标为列表（如 [目标A, 目标B]）或含「锁定指令：锁定 [新增目标名]」追加指令，此字段以英文逗号分隔多个目标名（如\"目标A, 目标B\"）\n- 列8: 锁定状态 lock_status —— 仅背景板登场 / 真正锁定 / 已离场。多目标锁定下各目标各自独立判定，lock_status 反映该行整体的最高锁定级别\n- 列9: 进度条 progress_percent（0~100 整数口诀：只填数字%、不写阶段/线名；读本轮 <ntrsProgress> 该黄毛↔对象的 X%，无标签则 0 或保持；只增不减。多目标按「姓名+对象」各一条进度）\n- 列10: 性别类型 gender_type（正常男性 / 伪娘 / 药娘 / 假小子；按本轮推进规则与世界书约束选取，不得自创枚举外取值）\n- 列11: 五型 five_type（权力型 / 魅力型 / 隐秘型 / 强制型 / 诱惑型）\n- 列12: 型体设定 body_config（性器官简述 + 手术状态 + 伟哥规则。药娘的体位编排唯一权威源：含 \"{\"未手
+==== parseDDLChineseName ====
+function parseDDLChineseName(ddl) {
+        if (!ddl)
+            return null;
+        // 匹配第一行的 -- 注释
+        const firstLine = ddl.split('\n')[0];
+        const match = firstLine.match(/--\s*(.+?)\s*$/);
+        return match ? match[1].trim() : null;
+    }
+    /**
+     * 从 DDL 中解析所有列名（按顺序）
+     * @param ddl CREATE TABLE 语句
+     * @returns 列名数组
+     */
+    function parseDDLColumnNames(ddl) {
+        if (!ddl)
+            return [];
+        const columns = [];
+        const body = getCreateTableDefinitionBody_ACU(ddl);
+        if (body === null)
+            return [];
+        // 按逗号分割（但要注意括号内和注释内的逗号）
+        const lines = splitColumnDefinitions(body);
+        for (const line of lines) {
+    
+==== tableNameMap.set 上下文 ====
+"TableName = String(physicalTableName || '').trim();\n                if (!englishTableName || !ddl)\n                    continue;\n                // 解析中文表名（DDL 第一行注释）\n                const chineseTableName = parseDDLChineseName(ddl);\n                if (chineseTableName) {\n                    mapper.tableNameMap.set(chineseTableName, englishTableName);\n                    mapper.reverseTableMap.set(englishTableName, chineseTableName);\n                }\n                else {\n          

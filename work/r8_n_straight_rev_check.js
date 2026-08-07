@@ -1,0 +1,12 @@
+const fs = require('fs');
+const p = 'C:/Users/zouyu/Downloads/酒馆/数据库/剧情推进预设/Cirno_NTRS_turn_edit_straight_revise_4.7.json';
+const raw = fs.readFileSync(p, 'utf8');
+const j = JSON.parse(raw);
+const c = j[0].plotTasks.find(t => t.id === 'plotTaskThugTempo').promptGroup[0].content;
+const i = c.indexOf('判断该已有黄毛本轮是否可行动');
+console.log('N-C1 NEW region:');
+console.log(JSON.stringify(c.slice(i - 12, i + 460)));
+const i2 = c.indexOf('本轮无黄毛在 {{user}} 当前场景画面内');
+console.log('N-A3 region:', JSON.stringify(c.slice(i2 - 8, i2 + 60)));
+const i3 = c.indexOf('黄毛表已命中该目标黄毛但黄毛不在');
+console.log('N-A4 region:', JSON.stringify(c.slice(i3 - 4, i3 + 150)));

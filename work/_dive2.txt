@@ -1,0 +1,91 @@
+﻿==== replaceDbSqlVariables ====
+function replaceDbSqlVariables(content) {
+        if (!content || typeof content !== 'string')
+            return content || '';
+        if (!isSqliteMode())
+            return content;
+        if (!isTemplateQueryRuntimeReady_ACU('模板变量'))
+            return content;
+        // 每轮处理开始时重置变量存储
+        clearDbSqlVariables();
+        let result = content;
+        // [P1] {[db.xxx.xxx(...) as 变量名]} / {[db.xxx.xxx(...)]} — ORM 风格（含 db.expr/db.rand/db.calc/db.max/db.min 静态方法）
+        result = replaceDbExpressions(result);
+        // [P2] {[sql "..." as 变量名]} / {[sql "..."]} — 原生 SQL
+        result = replaceSqlExpressions(result);
+        // [P3] $v:变量名 — 变量引用替换
+        result = replaceVarReferences(result);
+        return result;
+    }
+    // ═══════════════════════════════════════════════════════════════
+    // <if db="..."> / <if sql="..."> 条件求值
+    // ═══════════════════════════════════════════════════════════════
+    /**
+     * 求值 <if db="..."> 条件
+     * 返回布尔值：结果非零/非空/非false = true
+     *
+     * 通过 Proxy + new Function 直接执行整个表达式（含比较运算），
+     * 例如 db.重要人物表.where('阵营','敌方').count() > 3 直接返回布尔值。
+     * 纯 ORM 表达式（无比较运算）则对结果做 truthy 判断。
+     */
+    function evaluateDbCondition(expression) {
+        if (!isSqliteMode())
+            return false;
+        if (!isTemplateQueryRuntimeReady_ACU('<if db>'))
+            return false;
+        try {
+            const trimmed = expression.trim();
+            if (!trimmed)
+                return false;
+            const fullExpr = trimmed.startsWith('db.') ? trimmed : 'db.' + trimmed;
+            const db = createDbProxy();
+            const fn = new Function('db', `return ${fullExpr}`);
+            const result = fn(db);
+            // 如果表达式本身包含比较运算（如 > 3），result 已经是布尔值
+            if (typeof result === 'boolean')
+                return r
+==== renderPlotTaskMessages_ACU ====
+async function renderPlotTaskMessages_ACU(task, sharedContext, runtimeOptions = {}) {
+        const promptGroup = JSON.parse(JSON.stringify(task?.promptGroup || []));
+        const messagesToUse = Array.isArray(promptGroup) ? promptGroup : [];
+        const historyTagMap = runtimeOptions.historyTagMap instanceof Map
+            ? runtimeOptions.historyTagMap
+            : buildPlotTagMapFromText_ACU(sharedContext.lastPlotContent, null);
+        const relayTagMap = runtimeOptions.relayTagMap instanceof Map ? runtimeOptions.relayTagMap : new Map();
+        // 构建 $1 的任务级覆盖值（任务级世界书内容）
+        const replacementOverrides = {};
+        if (sharedContext.taskWorldbookContent !== undefined) {
+            replacementOverrides.$1 = sharedContext.taskWorldbookContent;
+        }
+        if (sharedContext.taskWorldbookDatabaseExcludedContent !== undefined) {
+            replacementOverrides.$9 = sharedContext.taskWorldbookDatabaseExcludedContent;
+        }
+        for (const seg of messagesToUse) {
+            if (!seg || typeof seg.content !== 'string')
+                continue;
+            let c = seg.content;
+            if (typeof sharedContext.resolveTaskTableWorldbookTokens === 'function') {
+                c = await sharedContext.resolveTaskTableWorldbookTokens(c);
+            }
+            c = await tryRenderPlotTemplateWithEjs_ACU(c);
+            c = sharedContext.performReplacements(c, replacementOverrides);
+            c = replacePlotTagPlaceholders_ACU(c, relayTagMap, historyTagMap);
+            c = renderPlotTaskContentWithIsolatedVariables_ACU(c, sharedContext);
+            seg.__renderedContent = c;
+        }
+        return messagesToUse
+            .filter(seg => seg && typeof seg.__renderedContent === 'string' && seg.__renderedContent.trim().length > 0)
+            .map(seg => ({ role: getNormalizedPlotMessageRole_ACU(seg.role), content: seg.__renderedContent }));
+    }
+    function getPlotPromptGroupForWorldbookTrigger_ACU(promptGroup) {
+        const tableNameCounts = new Map();
+        for (const table of Object.values(currentJsonTableData_ACU || {})) {
+            const tableName = String(table?.name || '').trim();
+            if (tableName)
+                tableNameCounts.set(tableName, (tableNameCounts.get(tableName) || 0) + 1);
+        }
+        const uniqueTableNames = new Set([...tableNameCounts]
+            .filter(([, count]) => count === 1)
+            .map(([tableName]) => tableName));
+        if (uniqueTableNames.size === 0)
+            re

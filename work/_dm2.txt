@@ -1,0 +1,3 @@
+﻿==== NameMapper.fromDDLs 调用点 ====
+@3004038 "ner\n            && _globalNameMapperBinding_ACU !== 'unbound'\n            && _globalNameMapperSchemaSignature === nextSignature) {\n            return true;\n        }\n        applyGlobalNameMapper_ACU(NameMapper.fromDDLs(ddlMap), nextSignature, owner);\n        logDebug_ACU(`[NameMapper] 全局映射器已发布: ${_globalNameMapper.tab"
+@3005873 "erOwner_ACU) {\n            logWarn_ACU('[NameMapper] 当前映射由活跃 runtime 持有，已拒绝无所有权刷新；请通过 provider 的 owner-aware 刷新发布新 schema。');\n            return getNameMapper();\n        }\n        _globalNameMapper = NameMapper.fromDDLs(ddlMap);\n        _globalNameMapperSchemaSignature = nextSignature;\n        _globalNameMapperBinding_"
