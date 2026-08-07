@@ -1,0 +1,1 @@
+"<User_Input>\n{{userCalib}}\n</User_Input>\n\n以上是用户的本轮输入。\n\n{{recall}}\n\n{{thugSpawn}}\n\n{{thugAction}}\n\n{{prologue}}\n\n{{plot}}\n\n请参考以上指导编排这一幕正文♡\n"

@@ -1,0 +1,17 @@
+<User_Input>
+{{userCalib}}
+</User_Input>
+
+以上是用户的本轮输入。
+
+{{recall}}
+
+{{thugSpawn}}
+
+{{thugAction}}
+
+{{prologue}}
+
+{{plot}}
+
+请参考以上指导编排这一幕正文♡
