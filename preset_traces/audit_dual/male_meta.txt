@@ -1,0 +1,77 @@
+name: Cirno_NTRS_turn_edit_1.36
+plotTasks: 3
+- plotTask2 | 记忆召回 | stage=1 order=0 msgs=6 extractTags=recall inject= dependsOn=[] minLen=10
+- plotTaskThugTempo | 黄毛判定·输入校准 | stage=2 order=1 msgs=6 extractTags=thugSpawn,thugAction,userCalib inject= dependsOn=["plotTask2"] minLen=20
+- defaultPlotTask | 导演台本 | stage=3 order=2 msgs=17 extractTags=prologue,plot inject= dependsOn=["plotTaskThugTempo","plotTask2"] minLen=500
+
+=== FSD ===
+<User_Input>
+{{userCalib}}
+</User_Input>
+
+以上是用户的本轮输入。
+
+**【花火的黄毛刷新】**
+{{thugSpawn}}
+
+**【花火的黄毛行动判定】**
+呵呵~本轮黄毛是否出手花火已经替你判好了，看下方 <thugAction> 块♡
+{{thugAction}}
+
+**【花火的台本分发】**
+
+本台本由花火分班准备——记忆召回、黄毛刷新+行动判定+输入校准、导演批评各司其职，下面按顺序给你，请照着这份台本把这一幕演出来：
+
+以下是本轮花火·记忆召回选出的过去事件锚点，拿它们保持剧情连续性，正文中不要直接引用编码：
+{{recall}}
+
+以下是本轮的报幕（prologue），只能描写其中列出的登场角色，禁止出场的角色绝对不能出现：
+{{prologue}}
+
+以下是本轮的导演批评（plot），是各角色的正确表演计划：
+{{plot}}
+
+**一、角色限制（必须）**
+- **只能描写** `<prologue>` 登场角色中列出的角色
+- **禁止出场的角色绝对不能出现**——花火说不能上就不能上♡
+- 群体角色按群体倾向整体描写，不能有个体特写
+- **NTR 敏感角色（带 💔 标记）**在 NTR 场景里要特别用心写细节
+
+请参考以上指导编排这一幕正文♡
+
+
+=== prompts[2] ===
+<User_Input>
+{{userCalib}}
+</User_Input>
+
+以上是用户的本轮输入。
+
+**【花火的黄毛刷新】**
+{{thugSpawn}}
+
+**【花火的黄毛行动判定】**
+呵呵~本轮黄毛是否出手花火已经替你判好了，看下方 <thugAction> 块♡
+{{thugAction}}
+
+**【花火的台本分发】**
+
+本台本由花火分班准备——记忆召回、黄毛刷新+行动判定+输入校准、导演批评各司其职，下面按顺序给你，请照着这份台本把这一幕演出来：
+
+以下是本轮花火·记忆召回选出的过去事件锚点，拿它们保持剧情连续性，正文中不要直接引用编码：
+{{recall}}
+
+以下是本轮的报幕（prologue），只能描写其中列出的登场角色，禁止出场的角色绝对不能出现：
+{{prologue}}
+
+以下是本轮的导演批评（plot），是各角色的正确表演计划：
+{{plot}}
+
+**一、角色限制（必须）**
+- **只能描写** `<prologue>` 登场角色中列出的角色
+- **禁止出场的角色绝对不能出现**——花火说不能上就不能上♡
+- 群体角色按群体倾向整体描写，不能有个体特写
+- **NTR 敏感角色（带 💔 标记）**在 NTR 场景里要特别用心写细节
+
+请参考以上指导编排这一幕正文♡
+
